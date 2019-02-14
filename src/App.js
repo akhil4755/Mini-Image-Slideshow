@@ -7,7 +7,7 @@ import './App.css';
       images: [],
 
       file: null,
-      position:'0',
+      alt_name:'0',
       descvalue:'',
       url : 'abcdefg',
       temp : false
@@ -29,9 +29,9 @@ handleUploadImage = (e) =>
 
     let img = [{
       file : file,
-      alt_name : ' ',
       description: this.state.descvalue,
-      position : this.state.position,
+      alt_name : this.state.alt_name,
+      url : this.state.url,
       img_url : newurl
     }]
 
@@ -47,7 +47,7 @@ handleUploadImage = (e) =>
 
         for(let i=0; i<arr.length; i++)
         {
-          if(arr[i].position === this.state.position )
+          if(arr[i].alt_name === this.state.alt_name )
           {
              arr[i].img_url = newurl;
              arr[i].description = this.state.descvalue;
@@ -103,7 +103,7 @@ handleimageDeletion = (e) =>
   let arr = this.state.images
   for (let i=0; i<arr.length; i++)
   {
-    arr[i].position = i;
+    arr[i].alt_name = i;
   }
 
   this.setState({ images: arr })
@@ -114,7 +114,7 @@ handleimageDeletion = (e) =>
     let images = null;
     images = this.state.images.map((value,i) => {
       return(<div>
-      <img alt={value.alt_name} src={value.img_url} id={value.position} onClick={this.handleimageDeletion} />
+      <img alt={value.alt_name} src={value.img_url} id={value.alt_name} onClick={this.handleimageDeletion} />
       </div>)
     })
 
@@ -130,7 +130,7 @@ handleimageDeletion = (e) =>
           <br />
 
           <div>
-              <select onChange={(e) => this.setState({position : e.target.value})}>
+              <select onChange={(e) => this.setState({alt_name : e.target.value})}>
                 <option value="0" >0</option>
                 <option value="1" >1</option>
                 <option value="2" >2</option>
