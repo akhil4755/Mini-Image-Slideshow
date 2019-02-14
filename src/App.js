@@ -22,14 +22,17 @@ class App extends Component {
 
 handleUploadImage = (e) =>
 {
+
   e.preventDefault();
+  let file = this.state.file
+  let newurl = file && URL.createObjectURL(file);
 
     let img = [{
-      file : this.state.file,
+      file : file,
       alt_name : ' ',
       description: this.state.descvalue,
       position : this.state.position,
-      img_url : 'aaaa',
+      img_url : newurl
     }]
 
     let flag=0;
@@ -46,7 +49,7 @@ handleUploadImage = (e) =>
         {
           if(arr[i].position === this.state.position )
           {
-             arr[i].img_url = ' ';
+             arr[i].img_url = newurl;
              arr[i].description = this.state.descvalue;
              arr[i].file = this.state.file;
              this.setState({images:arr})
@@ -111,7 +114,7 @@ handleimageDeletion = (e) =>
     let images = null;
     images = this.state.images.map((value,i) => {
       return(<div>
-      <button id={value.position} onClick={this.handleimageDeletion} >{value.position}</button>
+      <img alt={value.alt_name} src={value.img_url} id={value.position} onClick={this.handleimageDeletion} />
       </div>)
     })
 
